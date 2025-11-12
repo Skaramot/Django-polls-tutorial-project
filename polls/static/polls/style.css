@@ -1,0 +1,26 @@
+li a {
+    color: green;
+}
+
+body {
+    background: white url("images/background.png") no-repeat;
+    background-size: cover;
+    font-family: Arial, sans-serif;
+    margin: 20px;
+}
+h1 {
+    color: #333;
+}
+ul {
+    list-style-type: none;
+    padding: 0;
+}
+li {
+    margin: 10px 0;
+}
+a {
+    text-decoration: none;
+}
+a:hover {
+    text-decoration: underline;
+}
