@@ -31,3 +31,9 @@ class Choice(models.Model):
 
     def __str__(self):
         return self.choice_text
+    
+    def votes_percentage(self):
+        total_votes = self.question.choice_set.aggregate(models.Sum('votes'))['votes__sum']
+        if total_votes > 0:
+            return (self.votes / total_votes) * 100
+        return 0
