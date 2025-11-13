@@ -31,7 +31,7 @@ ALLOWED_HOSTS = []
 # Application definition
 
 INSTALLED_APPS = [
-    "polls.apps.PollsConfig",
+    #"polls.apps.PollsConfig",
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
@@ -40,6 +40,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     "debug_toolbar",
     'django_bootstrap5',
+    "polls"
 ]
 
 MIDDLEWARE = [
@@ -50,10 +51,18 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
-    "debug_toolbar.middleware.DebugToolbarMiddleware",
+    'polls.middleware.PollsLoggingMiddleware',
+    'polls.middleware.VoteProtectionMiddleware',
+    'polls.middleware.UserActivityMiddleware',
+    'debug_toolbar.middleware.DebugToolbarMiddleware',  # Add this
 ]
-
 ROOT_URLCONF = 'mysite.urls'
+
+AUTHENTICATION_BACKENDS = [
+    'polls.backends.EmailOrUsernameBackend',
+    'polls.backends.APIKeyBackend',
+    'django.contrib.auth.backends.ModelBackend',  # keep default
+]
 
 TEMPLATES = [
     {
@@ -121,7 +130,7 @@ USE_TZ = True
 STATIC_URL = 'static/'
 
 STATICFILES_DIRS = [
-    BASE_DIR / "static",
+    #BASE_DIR / "static",
     BASE_DIR / "polls" / "static",  # Add this line for app-specific static files
 ]
 
